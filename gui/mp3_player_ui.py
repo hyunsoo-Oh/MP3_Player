@@ -16,9 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGroupBox, QHBoxLayout, QLabel,
-    QLineEdit, QListWidget, QListWidgetItem, QPushButton,
-    QSizePolicy, QSlider, QSpacerItem, QVBoxLayout,
-    QWidget)
+    QListWidget, QListWidgetItem, QPushButton, QSizePolicy,
+    QSlider, QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -149,29 +148,6 @@ class Ui_Form(object):
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(-1, -1, -1, 9)
-        self.SearchBar = QHBoxLayout()
-        self.SearchBar.setObjectName(u"SearchBar")
-        self.searchLine = QLineEdit(self.searchBox)
-        self.searchLine.setObjectName(u"searchLine")
-        self.searchLine.setMaximumSize(QSize(16777215, 28))
-
-        self.SearchBar.addWidget(self.searchLine)
-
-        self.searchBtn = QPushButton(self.searchBox)
-        self.searchBtn.setObjectName(u"searchBtn")
-        self.searchBtn.setMaximumSize(QSize(30, 28))
-        icon = QIcon()
-        icon.addFile(u"../resources/search_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.searchBtn.setIcon(icon)
-        self.searchBtn.setIconSize(QSize(20, 20))
-
-        self.SearchBar.addWidget(self.searchBtn)
-
-        self.SearchBar.setStretch(0, 3)
-        self.SearchBar.setStretch(1, 1)
-
-        self.verticalLayout.addLayout(self.SearchBar)
-
         self.downloadBtn = QPushButton(self.searchBox)
         self.downloadBtn.setObjectName(u"downloadBtn")
 
@@ -188,7 +164,7 @@ class Ui_Form(object):
         self.playlistBox = QGroupBox(Form)
         self.playlistBox.setObjectName(u"playlistBox")
         self.playlistBox.setLayoutDirection(Qt.RightToLeft)
-        self.playlistBox.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.playlistBox.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
         self.verticalLayout_6 = QVBoxLayout(self.playlistBox)
         self.verticalLayout_6.setSpacing(0)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
@@ -255,52 +231,71 @@ class Ui_Form(object):
 
         self.playerControl = QVBoxLayout()
         self.playerControl.setObjectName(u"playerControl")
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.playControlBar = QHBoxLayout()
+        self.playControlBar.setObjectName(u"playControlBar")
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_4.addItem(self.horizontalSpacer)
+        self.playControlBar.addItem(self.horizontalSpacer)
 
         self.prevBtn = QPushButton(self.activityLayout)
         self.prevBtn.setObjectName(u"prevBtn")
         self.prevBtn.setMaximumSize(QSize(40, 16777215))
-        icon1 = QIcon()
-        icon1.addFile(u"../resources/prev_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.prevBtn.setIcon(icon1)
+        icon = QIcon()
+        icon.addFile(u"../resources/icons/prev_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.prevBtn.setIcon(icon)
 
-        self.horizontalLayout_4.addWidget(self.prevBtn)
+        self.playControlBar.addWidget(self.prevBtn)
 
         self.playBtn = QPushButton(self.activityLayout)
         self.playBtn.setObjectName(u"playBtn")
         self.playBtn.setMaximumSize(QSize(40, 16777215))
-        icon2 = QIcon()
-        icon2.addFile(u"../resources/play_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        icon2.addFile(u"../resources/prev_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.On)
-        self.playBtn.setIcon(icon2)
+        icon1 = QIcon()
+        icon1.addFile(u"../resources/icons/play_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon1.addFile(u"../resources/icons/pause_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.On)
+        self.playBtn.setIcon(icon1)
 
-        self.horizontalLayout_4.addWidget(self.playBtn)
+        self.playControlBar.addWidget(self.playBtn)
 
         self.nextBtn = QPushButton(self.activityLayout)
         self.nextBtn.setObjectName(u"nextBtn")
         self.nextBtn.setMaximumSize(QSize(40, 16777215))
-        icon3 = QIcon()
-        icon3.addFile(u"../resources/next_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.nextBtn.setIcon(icon3)
+        icon2 = QIcon()
+        icon2.addFile(u"../resources/icons/next_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.nextBtn.setIcon(icon2)
 
-        self.horizontalLayout_4.addWidget(self.nextBtn)
+        self.playControlBar.addWidget(self.nextBtn)
 
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_4.addItem(self.horizontalSpacer_2)
+        self.playControlBar.addItem(self.horizontalSpacer_2)
 
 
-        self.playerControl.addLayout(self.horizontalLayout_4)
+        self.playerControl.addLayout(self.playControlBar)
 
-        self.PlayTimeSlider = QSlider(self.activityLayout)
-        self.PlayTimeSlider.setObjectName(u"PlayTimeSlider")
-        self.PlayTimeSlider.setOrientation(Qt.Horizontal)
+        self.playTimeBar = QHBoxLayout()
+        self.playTimeBar.setObjectName(u"playTimeBar")
+        self.playTimeView = QLabel(self.activityLayout)
+        self.playTimeView.setObjectName(u"playTimeView")
+        self.playTimeView.setAlignment(Qt.AlignCenter)
 
-        self.playerControl.addWidget(self.PlayTimeSlider)
+        self.playTimeBar.addWidget(self.playTimeView)
+
+        self.playTimeSlider = QSlider(self.activityLayout)
+        self.playTimeSlider.setObjectName(u"playTimeSlider")
+        self.playTimeSlider.setOrientation(Qt.Horizontal)
+
+        self.playTimeBar.addWidget(self.playTimeSlider)
+
+        self.space = QLabel(self.activityLayout)
+        self.space.setObjectName(u"space")
+
+        self.playTimeBar.addWidget(self.space)
+
+        self.playTimeBar.setStretch(0, 1)
+        self.playTimeBar.setStretch(1, 5)
+        self.playTimeBar.setStretch(2, 1)
+
+        self.playerControl.addLayout(self.playTimeBar)
 
 
         self.horizontalLayout.addLayout(self.playerControl)
@@ -309,17 +304,17 @@ class Ui_Form(object):
         self.controlLayout.setObjectName(u"controlLayout")
         self.PlaybackBtn = QPushButton(self.activityLayout)
         self.PlaybackBtn.setObjectName(u"PlaybackBtn")
-        icon4 = QIcon()
-        icon4.addFile(u"../resources/loop_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        icon4.addFile(u"../resources/single_vector_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.On)
-        self.PlaybackBtn.setIcon(icon4)
+        icon3 = QIcon()
+        icon3.addFile(u"../resources/icons/loop_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon3.addFile(u"../resources/icons/single_vector_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.On)
+        self.PlaybackBtn.setIcon(icon3)
 
         self.controlLayout.addWidget(self.PlaybackBtn)
 
         self.label = QLabel(self.activityLayout)
         self.label.setObjectName(u"label")
         self.label.setMaximumSize(QSize(30, 30))
-        self.label.setPixmap(QPixmap(u"../resources/volume_icon.svg"))
+        self.label.setPixmap(QPixmap(u"../resources/icons/volume_icon.svg"))
 
         self.controlLayout.addWidget(self.label)
 
@@ -348,10 +343,9 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.searchBox.setTitle("")
-        self.searchBtn.setText("")
         self.downloadBtn.setText(QCoreApplication.translate("Form", u"Download", None))
         self.downloadListBtn.setText(QCoreApplication.translate("Form", u"List", None))
-        self.playlistBox.setTitle("")
+        self.playlistBox.setTitle(QCoreApplication.translate("Form", u"Play List", None))
         self.addMusicBtn.setText(QCoreApplication.translate("Form", u"Add Player", None))
         self.songTitleLabel.setText("")
         self.artistLabel.setText("")
@@ -361,6 +355,8 @@ class Ui_Form(object):
         self.prevBtn.setText("")
         self.playBtn.setText("")
         self.nextBtn.setText("")
+        self.playTimeView.setText(QCoreApplication.translate("Form", u"0:00/0:00", None))
+        self.space.setText("")
         self.PlaybackBtn.setText("")
         self.label.setText("")
     # retranslateUi

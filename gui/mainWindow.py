@@ -24,9 +24,9 @@ class MP3Player(QWidget):
 
     def update_loop_icon(self):
         if self.loop_mode:
-            icon = QIcon("../resources/single_vector_icon.svg")
+            icon = QIcon("../resources/icons/single_vector_icon.svg")
         else:
-            icon = QIcon("../resources/loop_icon.svg")
+            icon = QIcon("../resources/icons/loop_icon.svg")
         self.ui.PlaybackBtn.setIcon(icon)
 
 if __name__ == "__main__":
