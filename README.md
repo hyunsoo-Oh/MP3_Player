@@ -1,43 +1,65 @@
 # 🎧 MP3 Player - PySide6 GUI
-**PySide6를 기반으로 한 데스크탑 MP3 플레이어**
 
-## 📐 UI 구조 및 기능 설명
-### ✅ `mainLayout`
+**PySide6를 기반으로 한 데스크탑 MP3 플레이어입니다.**  
+음악을 검색해 다운로드하고, 직접 구성한 플레이리스트를 재생할 수 있습니다.
 
-음악을 다운로드하고, 로컬 저장소에 있는 음악을 리스트로 확인
+## 🖼️ 주요 화면 구성
 
-원하는 곡을 모아 플레이리스트로 구성
+### 🪟 MainWindow (메인 플레이어 화면)
 
-- **`sidebarLayout`**: 음악 다운로드 및 플레이리스트 구성
-- **`activityLayout`**: 현재 재생 정보 및 재생 컨트롤 영역
+**음악 다운로드 및 재생을 위한 메인 인터페이스입니다.**
 
-## 📁 sidebarLayout
+#### 🎛 좌측 사이드바 (`sidebarLayout`)
+- 🔽 **Download 버튼**  
+  → YouTube 검색 및 다운로드 창(`QDialog`) 실행
+- 📃 **List 버튼**  
+  → 다운로드된 전체 음악 목록 확인
+- 🎧 **PlayList 버튼**  
+  → 사용자가 직접 구성한 재생 목록 보기
 
-### 🎵 `playlistBox`
-- **`addMusicBtn`**: 로컬에 저장된 음악을 불러와 플레이리스트에 추가
+#### 🎵 음악 정보 영역 (`songInfoLayout`)
+- 현재 재생 중인 곡의 **제목 / 아티스트 / 앨범 이미지** 표시
+- `musicList`를 통해 현재 재생 중인 플레이리스트 목록 확인
 
-### 🔍 `searchBox`
-- **`downloadBtn`**: 음악을 다운로드
-- **`downloadListBtn`**: 다운로드한 음악 리스트 보기
+#### ⏯ 재생 컨트롤 영역 (`activityLayout`)
+- 현재 재생 곡 정보 (`nowTitleLabel`, `nowArtistLabel`)
+- 이전 / 재생 / 다음 곡 제어 버튼
+- 재생 시간 및 진행 슬라이더
+- 전체 반복 / 한 번 재생 토글 버튼
+- 볼륨 조절 슬라이더 및 아이콘
 
-### 📑 `songInfoLayout`
-- **`artistLabel` / `songTitleLabel`**: 선택된 곡의 가수명 및 제목 표시
-- **`musicList (QListWidget)`**: 플레이리스트에 추가된 음악 목록. 이 순서대로 음악이 자동 재생됨
+### 📥 DownloadDialog (`QDialog`)
 
-## 🎬 activityLayout
+YouTube 음악 검색 및 다운로드를 위한 팝업 창입니다.
 
-현재 재생 중인 음악 정보를 보여주고, 재생/정지/볼륨 등의 제어 기능을 제공
+- 🔍 `searchEdit` + `searchBtn`으로 유튜브 키워드 검색
+- 📜 `listView`에 검색 결과 5~10개 표시  
+  - 썸네일  
+  - 제목  
+  - 업로드 날짜
+- 🎯 리스트 아이템 더블 클릭 시 → **MP3 다운로드 시작**
 
-### 🎼 `nowPlayLayout`
-- **`nowTitleLabel`**: 현재 재생 중인 곡의 제목
-- **`nowArtistLabel`**: 현재 재생 중인 곡의 가수명
+## 📦 주요 기능 흐름
 
-### 🎛️ `playerControl`
-#### ▶️ `playControlBar`
-- **`prevBtn`**: 이전 곡으로 이동
-- **`playBtn`**: 재생 / 일시정지 토글
-- **`nextBtn`**: 다음 곡으로 이동
+### ① 유튜브 검색 & 다운로드
+- `Download` 버튼 클릭 → `DownloadDialog` 실행
+- 검색 결과(썸네일 + 제목 + 날짜) 가져오기
+- 선택한 영상 → MP3 다운로드
+- 다운로드된 음악은 자동으로 플레이어에 등록
 
-#### ⏱️ `playTimeBar`
-- **`playTimeSlider`**: 현재 재생 위치를 슬라이더로 표시 및 조절
-- **`playTimeView`**: 현재 시간 / 전체 시간 표시 (예: 0:43 / 3:21)
+### ② 음악 재생 및 리스트 관리
+- 음악 리스트에서 선택 시 재생 시작
+- 시크바, 볼륨, 반복, 일시정지 등 다양한 재생 제어 가능
+- 재생 중인 곡의 메타 정보 및 시간 표시
+
+### ③ 플레이리스트 구성
+- 사용자가 원하는 곡만 골라 `PlayList`로 구성
+- 리스트 순서대로 자동 재생 지원
+
+## 🛠 기술 스택
+
+- **Python 3.x**
+- **PySide6** (Qt for Python)
+- **QMediaPlayer** (로컬 MP3 재생)
+- **QListView + QAbstractListModel** (검색 결과 표시)
+- **QListWidget** (재생 목록 관리)
