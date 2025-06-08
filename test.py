@@ -1,53 +1,60 @@
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLineEdit, QListWidget, QListWidgetItem
-import sys
+import os
+from PySide6.QtWidgets import (
+    QApplication, QWidget, QPushButton, QLabel, QListWidget, QFileDialog,
+    QFileDialog, QSlider, QVBoxLayout, QHBoxLayout
+)
+from PySide6.QtCore import Qt, QUrl, QTimer
+from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
 
-class MainWindow(QWidget):
+class AudioApp(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("YouTube 검색 테스트")
-        self.resize(600, 400)
-        self.setup_ui()
+        self.settings()
+        self.initUI()
 
-    def setup_ui(self):
-        layout = QVBoxLayout(self)
+    def settings(self):
+        self.setWindowTitle("Aud-Just")
+        self.setGeometry(500, 500, 600, 300)
 
-        self.search_input = QLineEdit()
-        self.search_input.setPlaceholderText("검색어 입력")
-        layout.addWidget(self.search_input)
+    def initUI(self):
+        self.title = QLabel("Audio Adjuster")
+        self.file_list = QListWidget()
+        self.btn_opener = QPushButton("Choose a file")
+        self.btn_play = QPushButton("Play")
+        self.btn_pause = QPushButton("Pause")
+        self.btn_resume = QPushButton("Resume")
+        self.btn_reset = QPushButton("Reset")
 
-        self.search_button = QPushButton("검색")
-        layout.addWidget(self.search_button)
+        self.slider = QSlider(Qt.Orientation.Horizontal)
+        self.slider.setMinimum(50)
+        self.slider.setMaximum(150)
+        self.slider.setValue(100)
+        self.slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+        self.slider.setTickInterval(10)
 
-        self.result_list = QListWidget()
-        layout.addWidget(self.result_list)
+        self.master = QVBoxLayout()
+        row = QHBoxLayout()
+        col1 = QVBoxLayout()
+        col2 = QVBoxLayout()
 
-        self.search_button.clicked.connect(self.start_search)
+        self.master.addWidget(self.title)
+        self.master.addWidget(self.slider)
 
-    def start_search(self):
-        query = self.search_input.text().strip()
-        if not query:
-            return
+        col1.addWidget(self.file_list)
+        col2.addWidget(self.btn_opener)
+        col2.addWidget(self.btn_play)
+        col2.addWidget(self.btn_pause)
+        col2.addWidget(self.btn_resume)
+        col2.addWidget(self.btn_reset)
 
-        self.result_list.clear()
-        self.search_thread = YouTubeSearchThread(query)
-        self.search_thread.search_completed.connect(self.display_results)
-        self.search_thread.search_error.connect(self.display_error)
-        self.search_thread.start()
+        row.addLayout(col1)
+        row.addLayout(col2)
+        self.master.addLayout(row)
 
-    def display_results(self, results):
-        for result in results:
-            item = QListWidgetItem()
-            widget = SearchResultWidget(result)
-            item.setSizeHint(widget.sizeHint())
-            self.result_list.addItem(item)
-            self.result_list.setItemWidget(item, widget)
-
-    def display_error(self, msg):
-        error_item = QListWidgetItem(f"검색 오류: {msg}")
-        self.result_list.addItem(error_item)
+        self.setLayout(self.master)
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    win = MainWindow()
-    win.show()
-    sys.exit(app.exec())
+    app = QApplication([])
+    main = AudioApp()
+    main.show()
+    app.exec()

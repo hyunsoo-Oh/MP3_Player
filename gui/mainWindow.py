@@ -2,6 +2,7 @@ import sys
 import os
 from PySide6.QtWidgets import QApplication, QDialog, QWidget
 from PySide6.QtGui import QIcon
+from PySide6.QtCore import QSize
 from gui.mp3_player_ui import Ui_Form
 from gui.downloadDialog import DownloadDialog   # 직접 만들 파일
 from gui.constants import icon
