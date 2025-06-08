@@ -391,7 +391,7 @@ QScrollBar::handle:vertical:hover {
           <property name="icon">
            <iconset>
             <normaloff>../resources/loop_icon.svg</normaloff>
-            <normalon>../resources/single_loop_icon.svg</normalon>../resources/loop_icon.svg</iconset>
+            <normalon>../resources/single_vector_icon.svg</normalon>../resources/loop_icon.svg</iconset>
           </property>
          </widget>
         </item>

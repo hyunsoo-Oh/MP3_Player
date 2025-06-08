@@ -311,7 +311,7 @@ class Ui_Form(object):
         self.PlaybackBtn.setObjectName(u"PlaybackBtn")
         icon4 = QIcon()
         icon4.addFile(u"../resources/loop_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        icon4.addFile(u"../resources/single_loop_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.On)
+        icon4.addFile(u"../resources/single_vector_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.On)
         self.PlaybackBtn.setIcon(icon4)
 
         self.controlLayout.addWidget(self.PlaybackBtn)
