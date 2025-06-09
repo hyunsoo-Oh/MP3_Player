@@ -16,6 +16,8 @@ class DownloadDialog(QDialog):
         self.setWindowTitle("YouTube Download")
         self.setWindowIcon(QIcon(icon("download_icon.png")))
 
+        self.ui.searchBtn.setIcon(QIcon(icon("search_icon.svg")))
+
         # 선택된 비디오 정보 저장
         self.selected_video = None
 

@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (
     QInputDialog, QMessageBox, QListWidgetItem,
     QPushButton, QMenu
 )
-from PySide6.QtGui import QIcon, QAction, QFontMetrics
+from PySide6.QtGui import QIcon, QAction, QFontMetrics, QPixmap
 from PySide6.QtCore import QSize, Qt, QUrl, QTime
 from gui.mp3_player_ui import Ui_Form
 from gui.downloadDialog import DownloadDialog
@@ -33,6 +33,10 @@ class MP3Player(QWidget):
         self.ui.volumeSlider.setValue(50)
         self.setWindowTitle("YouTube MP3 Player")
         self.setWindowIcon(QIcon(icon("mp3_icon.png")))
+        self.ui.prevBtn.setIcon(QIcon(icon("prev_icon.svg")))
+        self.ui.playBtn.setIcon(QIcon(icon("play_icon.svg")))
+        self.ui.nextBtn.setIcon(QIcon(icon("next_icon.svg")))
+        self.ui.label.setPixmap(QPixmap(icon("volume_icon.svg")))
 
         self.ui.PlaybackBtn.clicked.connect(self.toggle_loop_mode)
         self.ui.downloadBtn.clicked.connect(self.open_download_ui)
