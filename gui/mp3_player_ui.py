@@ -199,10 +199,17 @@ class Ui_Form(object):
 
         self.mainLayout.addLayout(self.songInfoLayout)
 
-        self.musicList = QListWidget(Form)
+        self.playBox = QGroupBox(Form)
+        self.playBox.setObjectName(u"playBox")
+        self.horizontalLayout_2 = QHBoxLayout(self.playBox)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.musicList = QListWidget(self.playBox)
         self.musicList.setObjectName(u"musicList")
 
-        self.mainLayout.addWidget(self.musicList)
+        self.horizontalLayout_2.addWidget(self.musicList)
+
+
+        self.mainLayout.addWidget(self.playBox)
 
         self.mainLayout.setStretch(0, 3)
         self.mainLayout.setStretch(1, 5)
@@ -349,6 +356,7 @@ class Ui_Form(object):
         self.addMusicBtn.setText(QCoreApplication.translate("Form", u"Add Player", None))
         self.songTitleLabel.setText("")
         self.artistLabel.setText("")
+        self.playBox.setTitle(QCoreApplication.translate("Form", u"Play List", None))
         self.activityLayout.setTitle("")
         self.nowTitleLabel.setText(QCoreApplication.translate("Form", u"Title", None))
         self.nowArtistLabel.setText(QCoreApplication.translate("Form", u"Artist", None))

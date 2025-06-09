@@ -223,7 +223,16 @@ QScrollBar::handle:vertical:hover {
       </layout>
      </item>
      <item>
-      <widget class="QListWidget" name="musicList"/>
+      <widget class="QGroupBox" name="playBox">
+       <property name="title">
+        <string>Play List</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QListWidget" name="musicList"/>
+        </item>
+       </layout>
+      </widget>
      </item>
     </layout>
    </item>
